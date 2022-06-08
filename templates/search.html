@@ -1,0 +1,83 @@
+<html>
+	<head>
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<title> Search Movie</title>
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style/bootstrap.css') }}">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	</head>
+	<body>
+		<ul>
+			<li><a class="active" href="/">Sentiment Analysis</a></li>
+			<li><a href="/search">Search Movie</a></li>            
+		</ul>
+
+
+		<div class="container">
+
+			<form action= '/search' method="POST">
+				<br>
+				<div style="height: 7px;" class="col-sm align-self-center">
+					<div class="col">
+						<input type="text" style="height: 55px;" class=" mx-auto text-center form-control w-50" required name="search" placeholder="Search movie review using title">
+						
+					</div>
+				</div>
+				
+				<div class="form-group text-center">
+					<button class="btn mx-auto btn-secondary btn-lg" type="submit">Search</button>
+				</div>				
+				
+			</div>
+		</form>
+		{% if notfound%}
+		<div>
+			<h2>Judul yang anda cari tidak ada / ganti kata kunci</h2>
+
+		</div>
+		{% else %}
+		<div>
+			
+		</div>
+		{% endif %}
+
+		{% if hide%}
+		<div></div>
+		{% else %}
+		<div>
+			<table class = "table table-bordered">
+				<tr>
+					<th>
+						Judul
+					</th>
+					<th>
+						Ulasan
+					</th>
+					<th>
+						Actual
+					</th>
+					<th>
+						Persentase Prediksi Sentimen
+					</th>
+					<th>
+						Prediksi Sentimen
+					</th>
+				</tr>
+				{%for data in title_list%}
+				<tr>
+					<td>{{data[0][0]}} </td>
+					<td>{{data[0][1]}} </td>
+					<td>{{data[0][2]}} </td>
+					
+					<td>{{data[1][0]}}</td>
+					<td>{{data[1][1]}}</td>
+				</tr>
+				{%endfor%}
+			</table>
+		</div>
+		{% endif %}
+	</div>
+		
+	</body>
+</html>

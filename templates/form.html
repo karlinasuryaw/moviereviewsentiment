@@ -1,0 +1,77 @@
+
+<html>
+<head>
+    <title>Sentiment Analysis</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style/bootstrap.css') }}">
+</head>
+<body>
+    <ul>
+        <li><a class="active" href="/">Sentiment Analysis</a></li>
+        <li><a href="/search">Search Movie</a></li>            
+    </ul>
+
+    <h1><center>Welcome To Sentiment Analyzer</center></h1>
+    <div class="container">
+
+        <form action= '/' method="POST">
+            <div class="form-group">
+                <label for="title">Movie title</label>
+                <input type="text" class="form-control" id="title" name="title" placeholder="Insert movie title" required>
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1">Insert review</label>
+                <textarea class="form-control" name="review" id="exampleFormControlTextarea1" rows="3" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="optimizer">Select optimizer</label>
+                <select id ='optimizer' name='select_opt'  class="form-control" id="inputGroupSelect01">
+                    <option value="{{default_opt}}">{{default_opt}}</option>
+                    {%for opt in opt_list %}
+                    <option value="{{opt}}">{{opt}}</option>
+                    {%endfor%}
+                    <p>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                
+                <input value= "save" type="checkbox" id='saveornot' name= 'saveornot'>
+                <label for="saveornot">Simpan data kedalam database</label>
+            </div>
+            
+            <input type="submit" class="btn btn-primary-my-2">
+        </form>
+        
+                
+
+        {%if hide %}
+        <div>
+            
+        </div>
+        {% else%}
+        <div class = "container">   
+            <p>
+                <h3>{{title}}</h3>
+                <p>{{review_raw}}</p>
+                <h3>After preprocessing:</h3>
+                <p>{{review_clean}}</p>
+            </p>
+            <h3>Prediction result</h3>
+            <h3>{{tag_pred}}</h3>
+            <h3>{{max_acc}}</h3>
+            <h3>{{pred_res}}</h3>
+            <h3>{{opt}}</h3>
+        </div>
+        {% endif %}
+
+
+
+    </div>
+
+
+     
+</body>
+</html>
+
